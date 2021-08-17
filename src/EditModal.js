@@ -2,7 +2,7 @@ import React from 'react'
 import InputData from './InputData';
 
 const EditModal = (props) => {
-    console.log(props.prodOptions);
+   
    
     return (
         <div>

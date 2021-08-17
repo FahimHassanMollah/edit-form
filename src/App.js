@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import EditModal from './EditModal';
 
@@ -15,16 +15,48 @@ function App() {
       quantity: 5
     }
   ])
-  const updateArray = (id,obj) => {
-    console.log(id,obj);
-    setProdOptions(prodOptions.map((item,index)=>item.id===id ? obj:item))
-    console.log(prodOptions);
+  useEffect((id, obj) => {
+    const updateArray = (id, obj) => {
+      console.log(id, obj);
+      setProdOptions(prodOptions.map((item, index) => item.id === id ? obj : item))
+      console.log(prodOptions);
+    }
+    // updateArray()
+  }, [prodOptions])
+  const updateArray = (id, obj) => {
+    console.log(id, obj);
+    setProdOptions(prodOptions.map((item, index) => item.id === id ? obj : item))
+
   }
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ height:"100vh" }}>
-      <button className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+    <div>
+      <div className="d-flex justify-content-center align-items-center" >
+        <button className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+      </div>
+      <div>
+        <table>
+          <tr>
+            <td>name</td>
+            <td>quantity</td>
+          </tr>
+
+          {
+            prodOptions.map((el, key) => {
+              return (
+                <tr>
+                  <td>{el.name}</td>
+                  <td>{el.quantity}</td>
+                </tr>
+              )
+            })
+          }
+
+        </table>
+      </div>
       <EditModal updateArray={updateArray} prodOptions={prodOptions}></EditModal>
+
     </div>
+
   );
 }
 
