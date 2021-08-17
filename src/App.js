@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import EditModal from './EditModal';
 
 function App() {
+  const [prodOptions, setProdOptions] = useState([
+    {
+      id: 1,
+      name: "Lifebuoy Handwash",
+      quantity: 1
+    },
+    {
+      id: 2,
+      name: "Dettol Handwash  ",
+      quantity: 5
+    }
+  ])
+  const updateArray = (id,obj) => {
+    console.log(id,obj);
+    setProdOptions(prodOptions.map((item,index)=>item.id===id ? obj:item))
+    console.log(prodOptions);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="d-flex justify-content-center align-items-center" style={{ height:"100vh" }}>
+      <button className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+      <EditModal updateArray={updateArray} prodOptions={prodOptions}></EditModal>
     </div>
   );
 }
